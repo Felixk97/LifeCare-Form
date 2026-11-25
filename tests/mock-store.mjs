@@ -1,0 +1,3 @@
+let sequence=0;const data=new Map();
+export function getStore(){return {async get(key){return data.has(key)?structuredClone(data.get(key).value):null},async getWithMetadata(key){const e=data.get(key);return e?{data:structuredClone(e.value),etag:e.etag,metadata:{}}:null},async setJSON(key,value,opts={}){const old=data.get(key);if((opts.onlyIfNew&&old)||(opts.onlyIfMatch&&old?.etag!==opts.onlyIfMatch))return {modified:false};const etag='"'+(++sequence)+'"';data.set(key,{etag,value:structuredClone(value)});return {modified:true,etag}},async list({prefix=''}={}){return {blobs:[...data].filter(([key])=>key.startsWith(prefix)).map(([key,v])=>({key,etag:v.etag}))}},async delete(key){data.delete(key)}}}
+export function reset(){data.clear();sequence=0}
