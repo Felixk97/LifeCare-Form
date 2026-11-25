@@ -1,0 +1,25 @@
+[build]
+  command = "npm run build"
+  publish = "public"
+[functions]
+  directory = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"
+    Permissions-Policy = "camera=(self), microphone=(), geolocation=()"
+    Content-Security-Policy = "base-uri 'self'; object-src 'none'; form-action 'self'"
+
+# The admin page may not be framed by other sites (clickjacking protection).
+# To open it inside your own launcher, replace 'self' with 'self' https://YOUR-LAUNCHER-DOMAIN
+# and delete the X-Frame-Options line (it cannot name another site).
+[[headers]]
+  for = "/admin.html"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    Content-Security-Policy = "frame-ancestors 'self'; base-uri 'self'; object-src 'none'; form-action 'self'"

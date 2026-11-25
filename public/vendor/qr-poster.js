@@ -1,0 +1,13 @@
+/* LifeCare printable poster, shared by the preview and all exports. */
+(function(g){
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
+g.lifeCareQRPoster=function({title,url,logo,measure}){
+ const q=g.qrcode(0,'M');q.addData(url);q.make();const n=q.getModuleCount(),m=Math.floor(442/(n+8)),full=(n+8)*m;
+ const size=39,max=640,lines=[];let line='';const width=measure||((s)=>Array.from(s).length*21);
+ for(const word of String(title||'Form').trim().split(/\s+/)){let next=line?line+' '+word:word;if(width(next)<=max){line=next;continue}if(line){lines.push(line);line=''}for(const ch of Array.from(word)){if(line&&width(line+ch)>max){lines.push(line);line=''}line+=ch}}if(line)lines.push(line);if(!lines.length)lines.push('Form');
+ const titleY=226, qrY=titleY+(lines.length-1)*49+61, bottom=qrY+full+44,H=bottom+130,W=800;
+ let path='';for(let r=0;r<n;r++)for(let c=0;c<n;c++)if(q.isDark(r,c))path+=`M${c} ${r}h1v1h-1z`;
+ const left=(W-full)/2;
+ return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(title)} QR poster"><rect width="800" height="${H}" fill="#fff"/><rect x="22" y="22" width="756" height="${H-44}" rx="28" fill="#fff" stroke="#d9e2ee" stroke-width="2"/><path d="M50 22H750Q778 22 778 50V68H22V50Q22 22 50 22" fill="#233f82"/><path d="M22 68H232" stroke="#cf303f" stroke-width="5"/><image x="225" y="94" width="350" height="83" href="${esc(logo)}" xlink:href="${esc(logo)}"/><path d="M305 193H495" stroke="#d9e2ee" stroke-width="2"/>${lines.map((s,i)=>`<text x="400" y="${titleY+i*49}" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="${size}" fill="#20365d">${esc(s)}</text>`).join('')}<rect x="${left-14}" y="${qrY-14}" width="${full+28}" height="${full+28}" rx="18" fill="#f3f6fa" stroke="#dce5ee" stroke-width="2"/><rect x="${left}" y="${qrY}" width="${full}" height="${full}" fill="#fff"/><g transform="translate(${left+4*m} ${qrY+4*m}) scale(${m})" shape-rendering="crispEdges"><path d="${path}" fill="#000"/></g><rect x="48" y="${bottom}" width="704" height="86" rx="16" fill="#edf3fa"/><text x="400" y="${bottom+37}" text-anchor="middle" font-family="Arial,sans-serif" font-size="27" font-weight="700" fill="#233f82">Scan to Complete This Form</text><text x="400" y="${bottom+64}" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#526984">Open your phone camera and scan the QR code</text></svg>`;
+};
+})(typeof window!=='undefined'?window:globalThis);
