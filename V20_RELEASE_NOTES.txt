@@ -1,0 +1,13 @@
+LifeCare Form Builder V20
+
+Updates in this version:
+- Reworked the “Artistic” QR option into a sample-inspired “Brand Artistic” style.
+- Artistic QR now uses logo-art styling, stronger artwork fill, custom decorative corner circles and centred logo handling.
+- Artistic QR automatically reuses the uploaded artwork or selected centre logo when available.
+- QR customization panel labels updated to better describe the artistic style.
+- Existing fixed LifeCare poster background remains unchanged.
+- All existing form-builder, screening, response-sheet and attachment features retained.
+
+Notes:
+- The brand-artistic QR is sample-inspired, not a pixel-for-pixel copy of the sample brands.
+- The design still prioritizes scannability, so the generator may reduce the logo size when needed.

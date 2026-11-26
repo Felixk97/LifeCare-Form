@@ -1,0 +1,7 @@
+LifeCare Form Builder V21
+
+Requested change: remove the artistic QR option. The QR editor now offers Standard square, Rounded, and Dotted only. The artistic artwork upload, rendering code, and associated event handlers have been removed. The fixed LifeCare poster, adjustable centred logo, custom logo upload, QR colour, high-resolution PNG, SVG, print/PDF, and existing destination validation remain intact.
+
+No backend, storage schema, or respondent changes were made. Existing data and forms do not require migration for this change. The existing QR customizations are temporary (not saved per form).
+
+Validation: 35/35 automated tests passed, including a regression test for removal of the artistic option. Inline JavaScript and QR generator syntax checks passed. Live deployment and physical scanning were not tested in this revision.

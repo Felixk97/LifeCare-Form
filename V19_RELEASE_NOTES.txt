@@ -1,0 +1,8 @@
+LifeCare Form Builder V19 — Upload control polish
+Based on the exact V18 package. Changes are limited to admin.html upload UI.
+- Custom upload button with icon and file-name display for PDF/image attachments, QR logo and artwork.
+- Existing native input and upload handlers retained; keyboard focus ring and disabled state preserved.
+- Existing attachment limits (5 MB) and QR logo/artwork limits (2 MB) unchanged.
+- Existing QR poster and generator retained without modifications. Rounded, dotted and artistic preview PNGs were generated separately from that generator using a demonstration URL.
+- Existing data schemas, Netlify functions, IDs and storage untouched. No migration needed for this update.
+Tests: 35/35 existing Node tests passed; existing Chromium mobile editor and respondent smoke tests passed; attachment control and QR upload visibility checks passed. Three generated QR crops decoded using OpenCV to the expected demo URL. Live Netlify deployment, actual upload against live Netlify and phone scanning not tested.
